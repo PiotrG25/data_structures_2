@@ -9,3 +9,12 @@ Edge::Edge(int start, int end, int weight) {
 	this->weight = weight;
 }
 
+int Edge::getStart() {
+	return start;
+}
+int Edge::getEnd() {
+	return end;
+}
+int Edge::getWeight() {
+	return weight;
+}

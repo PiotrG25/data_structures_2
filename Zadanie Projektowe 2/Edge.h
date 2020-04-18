@@ -7,6 +7,10 @@ class Edge {
 public:
 	Edge();
 	Edge(int start, int end, int weight);
+
+	int getStart();
+	int getEnd();
+	int getWeight();
 };
 
 #endif
