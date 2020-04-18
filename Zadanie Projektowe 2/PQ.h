@@ -17,7 +17,6 @@ class PQ {
 
 
 	void bubbleUp(int index);
-
 	void bubbleDown(int index);
 
 	int parentIndexOf(int index);
