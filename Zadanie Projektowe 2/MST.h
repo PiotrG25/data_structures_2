@@ -7,6 +7,16 @@
 
 void qsort(Edge* edges, int left, int right);
 
+// Edge* primAlgorithm(Edge* edges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
+Edge* primAlgorithm(NeighbourList* neighbourList, int nrOfEdges, int nrOfVertices, int& resultWeight) {
+	Edge* resultEdges = new Edge[nrOfVertices - 1];
 
+}
+
+Edge* kruskalAlgorithm(Edge* edges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
+// Edge* kruskalAlgorithm(SortedEdges* sortedEdges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
+	Edge* resultEdges = new Edge[nrOfVertices - 1];
+
+}
 
 #endif
