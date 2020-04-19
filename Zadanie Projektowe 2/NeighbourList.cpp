@@ -2,7 +2,7 @@
 #include "NeighbourList.h"
 
 
-NeighbourList::Element::Element(Edge e) {
+NeighbourList::Element::Element(Edge* e) {
 	this->e = e;
 	next = nullptr;
 }
@@ -13,7 +13,7 @@ NeighbourList::NeighbourList(int from) {
 	head = tail = it = nullptr;
 }
 
-void NeighbourList::add(Edge e) {
+void NeighbourList::add(Edge* e) {
 	if (tail == nullptr) {
 		head = tail = it = new Element(e);
 		return;
@@ -32,26 +32,28 @@ bool NeighbourList::hasNext() {
 	return it != nullptr && it->next != nullptr;
 }
 
-Edge NeighbourList::getNext() {
+Edge* NeighbourList::getNext() {
 	it = it->next;
 	return it->e;
 }
 
 
 
-NeighbourList* makeNeighbourLists(Edge* arr, int edges, int vertices) {
+NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices) {
 
-	NeighbourList* lists = new NeighbourList[vertices];
-	for (int i = 0; i < vertices; i++) lists[i] = NeighbourList(0);
+	NeighbourList** lists = new NeighbourList*[vertices];
+	for (int i = 0; i < vertices; i++) lists[i] = new NeighbourList(i);
 
 	for (int i = 0; i < edges; i++) {
+		// Duplicating edges
 		// Undirected graph will be now two-directioned
 
-		Edge e1 = arr[i];
-		Edge e2 = Edge(e1.getEnd(), e1.getStart(), e1.getWeight());
+		Edge* e = arr[i];
+		Edge* e1 = new Edge(e->getStart(), e->getEnd(), e->getWeight());
+		Edge* e2 = new Edge(e->getEnd(), e->getStart(), e->getWeight());
 
-		lists[e1.getStart()].add(e1);
-		lists[e2.getStart()].add(e2);
+		lists[e1->getStart()]->add(e1);
+		lists[e2->getStart()]->add(e2);
 	}
 
 	return lists;

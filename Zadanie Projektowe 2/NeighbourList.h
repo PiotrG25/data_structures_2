@@ -9,10 +9,10 @@
 
 class NeighbourList {
 	struct Element {
-		Edge e;
+		Edge* e;
 		Element* next;
 
-		Element(Edge e);
+		Element(Edge* e);
 	};
 
 	int from;
@@ -23,13 +23,13 @@ public:
 	NeighbourList();
 	NeighbourList(int from);
 
-	void add(Edge e);
+	void add(Edge* e);
 	void resetIterator();
 	bool hasNext();
-	Edge getNext();
+	Edge* getNext();
 };
 
 
-NeighbourList* makeNeighbourLists(Edge* arr, int edges, int vertices);
+NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices);
 
 #endif

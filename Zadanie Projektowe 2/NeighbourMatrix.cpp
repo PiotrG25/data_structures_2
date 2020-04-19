@@ -30,7 +30,8 @@ NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
 
 	for (int i = 0; i < edges; i++) {
 		// duplicating Edges
-		// and converting undirected graph into two-directioned
+		// Undirected graph will be now two-directioned
+
 		Edge* e = arr[i];
 		Edge* e1 = new Edge(e->getStart(), e->getEnd(), e->getWeight());
 		Edge* e2 = new Edge(e->getEnd(), e->getStart(), e->getWeight());
