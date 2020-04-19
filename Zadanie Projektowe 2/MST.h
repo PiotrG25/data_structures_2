@@ -4,8 +4,7 @@
 
 #include "PQ.h"
 #include "NeighbourList.h"
-
-void qsort(Edge* edges, int left, int right);
+#include "SortedEdges.h"
 
 // Edge* primAlgorithm(Edge* edges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
 Edge* primAlgorithm(NeighbourList* neighbourList, int nrOfEdges, int nrOfVertices, int& resultWeight) {
@@ -13,8 +12,8 @@ Edge* primAlgorithm(NeighbourList* neighbourList, int nrOfEdges, int nrOfVertice
 
 }
 
-Edge* kruskalAlgorithm(Edge* edges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
-// Edge* kruskalAlgorithm(SortedEdges* sortedEdges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
+// Edge* kruskalAlgorithm(Edge* edges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
+Edge* kruskalAlgorithm(SortedEdges* sortedEdges, int nrOfEdges, int nrOfVertices, int& resultWeight) {
 	Edge* resultEdges = new Edge[nrOfVertices - 1];
 
 }
