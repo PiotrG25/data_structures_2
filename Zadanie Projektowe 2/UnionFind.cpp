@@ -45,3 +45,12 @@ int UnionFind::find(int i) {
 
 	return root;
 }
+
+
+bool UnionFind::areInOneUnion(int i, int j) {
+	return find(i) == find(j);
+}
+
+int UnionFind::getNumberOfSubgroups() {
+	return nr_of_subgroups;
+}

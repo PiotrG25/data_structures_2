@@ -10,8 +10,15 @@ public:
 
 	UnionFind(int* arr, int n);
 
+
 	void unify(int i, int j);
+
 	int find(int i);
+
+
+	bool areInOneUnion(int i, int j);
+
+	int getNumberOfSubgroups();
 };
 
 #endif

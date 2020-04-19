@@ -5,7 +5,7 @@
 #include "Edge.h"
 
 /*
-SortedEdges holds edges in ASC order  by weight
+SortedEdges holds edges in ASC order by weight
 */
 class SortedEdges {
 	Edge* edges;
