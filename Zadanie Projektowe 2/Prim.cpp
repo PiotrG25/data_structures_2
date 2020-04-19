@@ -3,7 +3,7 @@
 #include "Prim.h"
 
 
-Edge* prim(NeighbourList* list, int edges, int vertices, int& resultWeight) {
+Edge* prim(NeighbourList* lists, int edges, int vertices, int& resultWeight) {
 	return nullptr;
 }
 

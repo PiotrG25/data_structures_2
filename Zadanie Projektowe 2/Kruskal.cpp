@@ -3,7 +3,7 @@
 #include "Kruskal.h"
 
 
-Edge* kruskal(NeighbourList* list, int edges, int vertices, int& resultWeight) {
+Edge* kruskal(NeighbourList* lists, int edges, int vertices, int& resultWeight) {
 	return nullptr;
 }
 
