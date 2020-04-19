@@ -13,4 +13,6 @@ public:
 	int getWeight();
 };
 
+void qsortEdges(Edge* edges, int left, int right);
+
 #endif
