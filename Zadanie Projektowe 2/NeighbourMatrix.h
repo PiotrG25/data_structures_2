@@ -14,12 +14,14 @@ class NeighbourMatrix {
 public:
 
 	NeighbourMatrix(int vertices);
+	~NeighbourMatrix();
 
 	Edge* get(int i, int j);
 	void set(int i, int j, Edge* e);
 };
 
 
+// Makes Neighbour Matrix with copies of edges from the array
 NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices);
 
 #endif

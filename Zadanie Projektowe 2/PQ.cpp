@@ -6,8 +6,8 @@ void PQ::bubbleUp(int index) {
 	if (index <= 0) return;
 
 	int parent = parentIndexOf(index);
-	while (parent >= 0 && arr[parent].getWeight() > arr[index].getWeight()) {
-		Edge e = arr[index];
+	while (parent >= 0 && arr[parent]->getWeight() > arr[index]->getWeight()) {
+		Edge* e = arr[index];
 		arr[index] = arr[parent];
 		arr[parent] = e;
 
@@ -26,8 +26,8 @@ void PQ::bubbleDown(int index) {
 		else if (right >= size) {
 			// node has only one child
 
-			if (arr[left].getWeight() < arr[index].getWeight()) {
-				Edge e = arr[left];
+			if (arr[left]->getWeight() < arr[index]->getWeight()) {
+				Edge* e = arr[left];
 				arr[left] = arr[index];
 				arr[index] = e;
 			}
@@ -36,9 +36,9 @@ void PQ::bubbleDown(int index) {
 		else {
 			// node has two children
 
-			if (arr[left].getWeight() < arr[right].getWeight()) {
-				if (arr[left].getWeight() < arr[index].getWeight()) {
-					Edge e = arr[left];
+			if (arr[left]->getWeight() < arr[right]->getWeight()) {
+				if (arr[left]->getWeight() < arr[index]->getWeight()) {
+					Edge* e = arr[left];
 					arr[left] = arr[index];
 					arr[index] = e;
 
@@ -47,8 +47,8 @@ void PQ::bubbleDown(int index) {
 				else break;
 			}
 			else {
-				if (arr[right].getWeight() < arr[index].getWeight()) {
-					Edge e = arr[right];
+				if (arr[right]->getWeight() < arr[index]->getWeight()) {
+					Edge* e = arr[right];
 					arr[right] = arr[index];
 					arr[index] = e;
 
@@ -76,32 +76,33 @@ int PQ::rightChildIndexOf(int index) {
 
 PQ::PQ(int size) {
 	this->length = size;
-	this->arr = new Edge[this->length];
+	this->arr = new Edge*[this->length];
 	this->size = 0;
 }
-PQ::PQ(Edge* edges, int size) {
+PQ::PQ(Edge** edges, int size) {
 	this->length = size;
-	this->arr = new Edge[this->length];
-	for (int i = 0; i < size; ++i) arr[i] = edges[i];
+	this->arr = new Edge*[this->length];
+	for (int i = 0; i < size; ++i) arr[i] = edges[i]->copy();
 	this->size = size;
 
 	for (int i = parentIndexOf(size - 1); i >= 0; --i) bubbleDown(i);
 }
 PQ::~PQ() {
+	for (int i = 0; i < size; i++) delete arr[i];
 	delete[] arr;
 }
 
-void PQ::enqueue(Edge e) {
+void PQ::enqueue(Edge* e) {
 	if (size >= length) throw std::exception();
 
 	arr[size] = e;
 	bubbleUp(size);
 	++size;
 }
-Edge PQ::dequeue() {
+Edge* PQ::dequeue() {
 	if (0 >= size) throw std::exception();
 
-	Edge e = arr[0];
+	Edge* e = arr[0];
 	arr[0] = arr[--size];
 	bubbleDown(0);
 

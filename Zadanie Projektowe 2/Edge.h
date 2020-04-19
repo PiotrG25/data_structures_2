@@ -11,8 +11,12 @@ public:
 	int getStart();
 	int getEnd();
 	int getWeight();
+
+	Edge* copy(); // creates new object with the same attributes
+	void reverse(); // swaps start with end
 };
 
+// sorts edges in ascending orber by weights
 void qsortEdges(Edge* edges, int left, int right);
 
 #endif

@@ -37,3 +37,15 @@ void qsortEdges(Edge* edges, int left, int right) {
 	if (i < right) qsortEdges(edges, i, right);
 	if (left < j) qsortEdges(edges, left, j);
 }
+
+
+Edge* Edge::copy() {
+	return new Edge(start, end, weight);
+}
+
+void Edge::reverse() {
+	int t = start;
+	start = end;
+	end = t;
+}
+

@@ -7,11 +7,26 @@ NeighbourList::Element::Element(Edge* e) {
 	next = nullptr;
 }
 
+NeighbourList::Element::~Element() {
+	delete e;
+}
+
+
 NeighbourList::NeighbourList() { ; }
 NeighbourList::NeighbourList(int from) {
 	this->from = from;
 	head = tail = it = nullptr;
 }
+
+NeighbourList::~NeighbourList() {
+	it = head;
+	while (it != nullptr) {
+		it = it->next;
+		delete head;
+		head = it;
+	}
+}
+
 
 void NeighbourList::add(Edge* e) {
 	if (tail == nullptr) {
@@ -48,9 +63,9 @@ NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices) {
 		// Duplicating edges
 		// Undirected graph will be now two-directioned
 
-		Edge* e = arr[i];
-		Edge* e1 = new Edge(e->getStart(), e->getEnd(), e->getWeight());
-		Edge* e2 = new Edge(e->getEnd(), e->getStart(), e->getWeight());
+		Edge* e1 = arr[i]->copy();
+		Edge* e2 = arr[i]->copy();
+		e2->reverse();
 
 		lists[e1->getStart()]->add(e1);
 		lists[e2->getStart()]->add(e2);

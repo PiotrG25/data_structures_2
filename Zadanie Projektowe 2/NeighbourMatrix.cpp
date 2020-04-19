@@ -13,6 +13,11 @@ NeighbourMatrix::NeighbourMatrix(int vertices) {
 	}
 }
 
+NeighbourMatrix::~NeighbourMatrix() {
+	for (int i = 0; i < vertices; i++) delete arr[i];
+	delete[] arr;
+}
+
 
 Edge* NeighbourMatrix::get(int i, int j) {
 	if (i < 0 || j < 0 || i >= vertices || j >= vertices) return nullptr;
@@ -32,9 +37,9 @@ NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
 		// duplicating Edges
 		// Undirected graph will be now two-directioned
 
-		Edge* e = arr[i];
-		Edge* e1 = new Edge(e->getStart(), e->getEnd(), e->getWeight());
-		Edge* e2 = new Edge(e->getEnd(), e->getStart(), e->getWeight());
+		Edge* e1 = arr[i]->copy();
+		Edge* e2 = arr[i]->copy();
+		e2->reverse();
 
 		matrix->set(e1->getStart(), e1->getEnd(), e1);
 		matrix->set(e2->getStart(), e2->getEnd(), e2);

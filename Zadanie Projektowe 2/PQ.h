@@ -13,7 +13,7 @@ class PQ {
 
 	int length; // length of the array
 	int size; // number of elements in the array
-	Edge* arr; // the array
+	Edge** arr; // the array
 
 
 	void bubbleUp(int index);
@@ -27,11 +27,11 @@ public:
 
 
 	PQ(int size);
-	PQ(Edge* edges, int size);
+	PQ(Edge** edges, int size);
 	~PQ();
 
-	void enqueue(Edge e);
-	Edge dequeue();
+	void enqueue(Edge* e);
+	Edge* dequeue();
 
 	int getSize();
 };
