@@ -4,10 +4,10 @@
 
 
 Edge* prim(NeighbourList* list, int edges, int vertices, int& resultWeight) {
-
+	return nullptr;
 }
 
-Edge* prim(NeighbourList* list, int edges, int vertices, int& resultWeight) {
-
+Edge* prim(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight) {
+	return nullptr;
 }
 

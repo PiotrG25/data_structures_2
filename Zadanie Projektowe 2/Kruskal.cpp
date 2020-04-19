@@ -4,9 +4,9 @@
 
 
 Edge* kruskal(NeighbourList* list, int edges, int vertices, int& resultWeight) {
-
+	return nullptr;
 }
 
-Edge* kruskal(NeighbourList* list, int edges, int vertices, int& resultWeight) {
-
+Edge* kruskal(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight) {
+	return nullptr;
 }

@@ -9,6 +9,6 @@
 #include "NeighbourMatrix.h"
 
 Edge* prim(NeighbourList* list, int edges, int vertices, int& resultWeight);
-Edge* prim(NeighbourList* list, int edges, int vertices, int& resultWeight);
+Edge* prim(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight);
 
 #endif
