@@ -2,6 +2,8 @@
 #ifndef NEIGHBOUR_MATRIX_H
 #define NEIGHBOUR_MATRIX_H
 
+#include <iostream>
+#include <iomanip>
 
 #include "Edge.h"
 
@@ -23,6 +25,8 @@ public:
 
 // Makes Neighbour Matrix with copies of edges from the array
 NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices);
+
+void printNeighbourMatrix(NeighbourMatrix* matrix, int vertices);
 
 #endif
 

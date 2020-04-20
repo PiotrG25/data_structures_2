@@ -2,6 +2,7 @@
 #ifndef NEIGHBOUR_LIST_H
 #define NEIGHBOUR_LIST_H
 
+#include <iostream>
 
 #include "Edge.h"
 
@@ -34,5 +35,7 @@ public:
 
 // Makes Neighbour Lists from copies of edges in the array
 NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices);
+
+void printNeighbourLists(NeighbourList** lists, int vertices);
 
 #endif

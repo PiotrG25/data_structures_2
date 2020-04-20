@@ -77,6 +77,7 @@ int PQ::rightChildIndexOf(int index) {
 PQ::PQ(int size) {
 	this->length = size;
 	this->arr = new Edge*[this->length];
+	for (int i = 0; i < length; i++) arr[i] = nullptr;
 	this->size = 0;
 }
 PQ::PQ(Edge** edges, int size) {
@@ -104,6 +105,7 @@ Edge* PQ::dequeue() {
 
 	Edge* e = arr[0];
 	arr[0] = arr[--size];
+	arr[size] = nullptr;
 	bubbleDown(0);
 
 	return e;

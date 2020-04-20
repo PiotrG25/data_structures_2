@@ -47,3 +47,20 @@ NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
 
 	return matrix;
 }
+
+void printNeighbourMatrix(NeighbourMatrix* matrix, int vertices) {
+	for (int i = 0; i < vertices; i++) {
+		for (int j = 0; j < vertices; j++) {
+			Edge* e = matrix->get(i, j);
+			if (e == nullptr) {
+				std::cout << std::setw(3) << "inf" << ' ';
+			}
+			else {
+				std::cout << std::setw(3) << e->getWeight() << ' ';
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+

@@ -8,7 +8,7 @@ class UnionFind {
 
 public:
 
-	UnionFind(int* arr, int n);
+	UnionFind(int n);
 
 	// unifies two subgroups into one group
 	// connects smaller group to bigger group
@@ -21,6 +21,7 @@ public:
 	bool areInOneUnion(int i, int j);
 
 	int getNumberOfSubgroups();
+	bool isOneUnion();
 };
 
 #endif

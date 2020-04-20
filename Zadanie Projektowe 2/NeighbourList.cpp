@@ -12,7 +12,10 @@ NeighbourList::Element::~Element() {
 }
 
 
-NeighbourList::NeighbourList() { ; }
+NeighbourList::NeighbourList() {
+	from = -1;
+	head = tail = it = nullptr;
+}
 NeighbourList::NeighbourList(int from) {
 	this->from = from;
 	head = tail = it = nullptr;
@@ -48,8 +51,9 @@ bool NeighbourList::hasNext() {
 }
 
 Edge* NeighbourList::getNext() {
+	Edge* e = it->e;
 	it = it->next;
-	return it->e;
+	return e;
 }
 
 
@@ -72,4 +76,16 @@ NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices) {
 	}
 
 	return lists;
+}
+
+void printNeighbourLists(NeighbourList** lists, int vertices) {
+	for (int i = 0; i < vertices; i++) {
+		std::cout << i;
+		while (lists[i]->hasNext()) {
+			Edge* e = lists[i]->getNext();
+			std::cout << ' ' << e->getEnd() << ' ' << e->getWeight();
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
 }

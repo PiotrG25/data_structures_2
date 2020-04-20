@@ -1,7 +1,7 @@
 
 #include "UnionFind.h"
 
-UnionFind::UnionFind(int* arr, int n) {
+UnionFind::UnionFind(int n) {
 	id = new int[n];
 	size = new int[n];
 	nr_of_subgroups = n;
@@ -53,4 +53,8 @@ bool UnionFind::areInOneUnion(int i, int j) {
 
 int UnionFind::getNumberOfSubgroups() {
 	return nr_of_subgroups;
+}
+
+bool UnionFind::isOneUnion() {
+	return nr_of_subgroups == 1;
 }
