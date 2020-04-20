@@ -7,9 +7,7 @@ NeighbourList::Element::Element(Edge* e) {
 	next = nullptr;
 }
 
-NeighbourList::Element::~Element() {
-	delete e;
-}
+NeighbourList::Element::~Element() { ; }
 
 
 NeighbourList::NeighbourList() {
@@ -47,7 +45,7 @@ void NeighbourList::resetIterator() {
 }
 
 bool NeighbourList::hasNext() {
-	return it != nullptr && it->next != nullptr;
+	return it != nullptr;
 }
 
 Edge* NeighbourList::getNext() {
@@ -83,7 +81,7 @@ void printNeighbourLists(NeighbourList** lists, int vertices) {
 		std::cout << i;
 		while (lists[i]->hasNext()) {
 			Edge* e = lists[i]->getNext();
-			std::cout << ' ' << e->getEnd() << ' ' << e->getWeight();
+			std::cout << ' ' << '(' << e->getEnd() << ',' << ' ' << e->getWeight() << ')';
 		}
 		std::cout << std::endl;
 	}

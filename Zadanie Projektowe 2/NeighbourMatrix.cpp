@@ -14,7 +14,6 @@ NeighbourMatrix::NeighbourMatrix(int vertices) {
 }
 
 NeighbourMatrix::~NeighbourMatrix() {
-	for (int i = 0; i < vertices; i++) delete arr[i];
 	delete[] arr;
 }
 

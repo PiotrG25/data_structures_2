@@ -89,7 +89,6 @@ PQ::PQ(Edge** edges, int size) {
 	for (int i = parentIndexOf(size - 1); i >= 0; --i) bubbleDown(i);
 }
 PQ::~PQ() {
-	for (int i = 0; i < size; i++) delete arr[i];
 	delete[] arr;
 }
 
@@ -103,7 +102,7 @@ void PQ::enqueue(Edge* e) {
 Edge* PQ::dequeue() {
 	if (0 >= size) throw std::exception();
 
-	Edge* e = arr[0];
+ 	Edge* e = arr[0];
 	arr[0] = arr[--size];
 	arr[size] = nullptr;
 	bubbleDown(0);

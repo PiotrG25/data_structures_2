@@ -12,6 +12,11 @@ UnionFind::UnionFind(int n) {
 	}
 }
 
+UnionFind::~UnionFind() {
+	delete[] id;
+	delete[] size;
+}
+
 
 void UnionFind::unify(int i, int j) {
 

@@ -42,6 +42,8 @@ int main() {
 	delete lists;
 	delete matrix;
 
+	cout << "result:" << endl;
+
 	lists = makeNeighbourLists(result, edges, vertices);
 	printNeighbourLists(lists, vertices);
 	matrix = makeNeighbourMatrix(result, edges, vertices);

@@ -9,6 +9,7 @@ class UnionFind {
 public:
 
 	UnionFind(int n);
+	~UnionFind();
 
 	// unifies two subgroups into one group
 	// connects smaller group to bigger group
