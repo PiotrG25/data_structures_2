@@ -7,7 +7,9 @@ NeighbourList::Element::Element(Edge* e) {
 	next = nullptr;
 }
 
-NeighbourList::Element::~Element() { ; }
+NeighbourList::Element::~Element() {
+	delete e;
+}
 
 
 NeighbourList::NeighbourList() {

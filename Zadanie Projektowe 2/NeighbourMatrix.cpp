@@ -14,6 +14,11 @@ NeighbourMatrix::NeighbourMatrix(int vertices) {
 }
 
 NeighbourMatrix::~NeighbourMatrix() {
+	for (int i = 0; i < vertices; i++) {
+		for (int j = 0; j < vertices; j++) {
+			if (arr[i * vertices + j] != nullptr) delete arr[i * vertices + j];
+		}
+	}
 	delete[] arr;
 }
 
