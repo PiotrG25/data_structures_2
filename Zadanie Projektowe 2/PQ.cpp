@@ -80,14 +80,6 @@ PQ::PQ(int size) {
 	for (int i = 0; i < length; i++) arr[i] = nullptr;
 	this->size = 0;
 }
-PQ::PQ(Edge** edges, int size) {
-	this->length = size;
-	this->arr = new Edge*[this->length];
-	for (int i = 0; i < size; ++i) arr[i] = edges[i]->copy();
-	this->size = size;
-
-	for (int i = parentIndexOf(size - 1); i >= 0; --i) bubbleDown(i);
-}
 PQ::~PQ() {
 	delete[] arr;
 }
