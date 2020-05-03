@@ -12,60 +12,55 @@ NeighbourList::Element::~Element() {
 }
 
 
-NeighbourList::NeighbourList() {
-	from = -1;
-	head = tail = it = nullptr;
-}
+NeighbourList::NeighbourList() { ; }
 NeighbourList::NeighbourList(int from) {
 	this->from = from;
-	head = tail = it = nullptr;
+	size = 0;
+	head = tail = nullptr;
 }
 
 NeighbourList::~NeighbourList() {
-	it = head;
-	while (it != nullptr) {
-		it = it->next;
+	Element* next = head;
+	while (next != nullptr) {
+		next = next->next;
 		delete head;
-		head = it;
+		head = next;
 	}
 }
 
 
 void NeighbourList::add(Edge* e) {
 	if (tail == nullptr) {
-		head = tail = it = new Element(e);
+		head = tail = new Element(e);
 		return;
 	}
 
 	tail->next = new Element(e);
 	tail = tail->next;
+	++size;
+}
+
+Edge** NeighbourList::getEdges(int& size) {
+	size = this->size;
+	Edge** edges = new Edge * [size];
+	
+	// iterator of struct Element
+	Element* it = head;
+	for (int i = 0; i < size; i++) {
+		edges[i] = it->e->copy();
+		it = it->next;
+	}
 }
 
 
-void NeighbourList::resetIterator() {
-	it = head;
-}
-
-bool NeighbourList::hasNext() {
-	return it != nullptr;
-}
-
-Edge* NeighbourList::getNext() {
-	Edge* e = it->e;
-	it = it->next;
-	return e;
-}
-
-
-
-NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices) {
+NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int vertices) {
 
 	NeighbourList** lists = new NeighbourList*[vertices];
 	for (int i = 0; i < vertices; i++) lists[i] = new NeighbourList(i);
 
 	for (int i = 0; i < edges; i++) {
 		// Duplicating edges
-		// Undirected graph will be now two-directioned
+		// Undirected graph will now be two-directioned
 
 		Edge* e1 = arr[i]->copy();
 		Edge* e2 = arr[i]->copy();
@@ -81,8 +76,10 @@ NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices) {
 void printNeighbourLists(NeighbourList** lists, int vertices) {
 	for (int i = 0; i < vertices; i++) {
 		std::cout << i;
-		while (lists[i]->hasNext()) {
-			Edge* e = lists[i]->getNext();
+		int n;
+		Edge** edges = lists[i]->getEdges(n);
+		for(int j = 0; j < n; j++) {
+			Edge* e = edges[i];
 			std::cout << ' ' << '(' << e->getEnd() << ',' << ' ' << e->getWeight() << ')';
 		}
 		std::cout << std::endl;
