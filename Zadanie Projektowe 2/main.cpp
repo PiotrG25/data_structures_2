@@ -35,7 +35,7 @@ int main() {
 
 
 	int resultWeight = 0;
-	Edge** result = prim(matrix, edges, vertices, resultWeight);
+	Edge** result = kruskal(matrix, edges, vertices, resultWeight);
 
 	cout << "result: " << resultWeight << endl;
 
