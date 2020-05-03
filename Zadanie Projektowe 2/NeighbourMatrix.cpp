@@ -34,12 +34,12 @@ void NeighbourMatrix::set(int i, int j, Edge* e) {
 }
 
 
-NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
+NeighbourMatrix* NeighbourMatrix::makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
 	NeighbourMatrix* matrix = new NeighbourMatrix(vertices);
 
 	for (int i = 0; i < edges; i++) {
 		// duplicating Edges
-		// Undirected graph will be now two-directioned
+		// Undirected graph will be now bidirected
 
 		Edge* e1 = arr[i]->copy();
 		Edge* e2 = arr[i]->copy();
@@ -52,7 +52,7 @@ NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
 	return matrix;
 }
 
-void printNeighbourMatrix(NeighbourMatrix* matrix, int vertices) {
+void NeighbourMatrix::printNeighbourMatrix(NeighbourMatrix* matrix, int vertices) {
 	for (int i = 0; i < vertices; i++) {
 		for (int j = 0; j < vertices; j++) {
 			Edge* e = matrix->get(i, j);

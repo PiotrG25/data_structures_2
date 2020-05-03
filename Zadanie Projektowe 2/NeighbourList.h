@@ -31,7 +31,9 @@ class NeighbourList {
 	// !!! does not copy edge !!!
 	// PS: used only in static lists constructor
 	void add(Edge* e);
+
 public:
+
 	// deletes all Elements and Edges within these elements
 	~NeighbourList();
 
