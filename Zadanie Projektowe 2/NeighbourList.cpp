@@ -48,7 +48,7 @@ NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int ver
 
 	for (int i = 0; i < edges; i++) {
 		// Duplicating edges
-		// Undirected graph will now be two-directioned
+		// Undirected graph will now be bidirectional
 
 		Edge* e1 = arr[i]->copy();
 		Edge* e2 = arr[i]->copy();

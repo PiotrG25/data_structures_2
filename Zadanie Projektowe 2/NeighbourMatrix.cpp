@@ -39,7 +39,7 @@ NeighbourMatrix* NeighbourMatrix::makeNeighbourMatrix(Edge** arr, int edges, int
 
 	for (int i = 0; i < edges; i++) {
 		// duplicating Edges
-		// Undirected graph will be now bidirected
+		// Undirected graph will be now bidirectional
 
 		Edge* e1 = arr[i]->copy();
 		Edge* e2 = arr[i]->copy();
