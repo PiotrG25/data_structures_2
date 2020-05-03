@@ -40,18 +40,6 @@ void NeighbourList::add(Edge* e) {
 	++size;
 }
 
-Edge** NeighbourList::getEdges(int& size) {
-	size = this->size;
-	Edge** edges = new Edge * [size];
-	
-	// iterator of struct Element
-	Element* it = head;
-	for (int i = 0; i < size; i++) {
-		edges[i] = it->e->copy();
-		it = it->next;
-	}
-}
-
 
 NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int vertices) {
 
@@ -73,14 +61,17 @@ NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int ver
 	return lists;
 }
 
-void printNeighbourLists(NeighbourList** lists, int vertices) {
+void NeighbourList::printNeighbourLists(NeighbourList** lists, int vertices) {
 	for (int i = 0; i < vertices; i++) {
 		std::cout << i;
-		int n;
-		Edge** edges = lists[i]->getEdges(n);
-		for(int j = 0; j < n; j++) {
-			Edge* e = edges[i];
+
+		// iterator of elements
+		Element* it = lists[i]->head;
+
+		while(it != nullptr) {
+			Edge* e = it->e;
 			std::cout << ' ' << '(' << e->getEnd() << ',' << ' ' << e->getWeight() << ')';
+			it = it->next;
 		}
 		std::cout << std::endl;
 	}

@@ -40,16 +40,12 @@ public:
 	// Makes Neighbour Lists from copies of edges in the array
 	static NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices);
 
-	// returns pointer to array of edges copied from the list
-	// sets size to size of the array
-	Edge** getEdges(int& size);
+	// prints for each list list of edges in format:
+	// j (v1, w1), (v2, w2), ...
+	// where j is index of from vertex
+	// vi and wi are index of neighbouring vertex and weight of egdge between
+	static void printNeighbourLists(NeighbourList** lists, int vertices);
 };
 
-// prints for each list 
-// list of edges in format:
-// i (v1, w1), (v2, w2), ...
-// where i is index of from vertex
-// vj and wj are index of neighbouring vertex and weight of egdge between
-void printNeighbourLists(NeighbourList** lists, int vertices);
 
 #endif
