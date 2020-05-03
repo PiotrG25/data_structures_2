@@ -35,9 +35,7 @@ int main() {
 
 
 	int resultWeight = 0;
-	Edge** result = kruskal(matrix, edges, vertices, resultWeight);
-
-	cout << "result: " << resultWeight << endl;
+	Edge** result = kruskal(lists, edges, vertices, resultWeight);
 
 	for (int i = 0; i < vertices; i++) delete lists[i];
 	delete[] lists;
@@ -46,13 +44,13 @@ int main() {
 	cout << "result: " << resultWeight << endl;
 
 	lists = NeighbourList::makeNeighbourLists(result, vertices - 1, vertices);
-	cout << "result: " << resultWeight << endl;
 	printNeighbourLists(lists, vertices);
-	cout << "result: " << resultWeight << endl;
 	matrix = NeighbourMatrix::makeNeighbourMatrix(result, vertices - 1, vertices);
-	cout << "result: " << resultWeight << endl;
 	printNeighbourMatrix(matrix, vertices);
-	cout << "result: " << resultWeight << endl;
+
+	for (int i = 0; i < vertices; i++) delete lists[i];
+	delete[] lists;
+	delete matrix;
 
 	return 0;
 }
