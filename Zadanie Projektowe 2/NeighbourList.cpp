@@ -62,7 +62,7 @@ NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int ver
 }
 
 
-Edge* NeighbourList::resetIterator() {
+void NeighbourList::resetIterator() {
 	it = head;
 }
 Edge* NeighbourList::getNext() {
@@ -72,7 +72,7 @@ Edge* NeighbourList::getNext() {
 	return e;
 }
 bool NeighbourList::hasNext() {
-	return it == nullptr;
+	return it != nullptr;
 }
 
 void printNeighbourLists(NeighbourList** lists, int vertices) {

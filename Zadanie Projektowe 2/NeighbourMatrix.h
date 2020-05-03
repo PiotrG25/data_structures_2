@@ -30,8 +30,7 @@ public:
 	Edge* get(int i, int j);
 };
 
-// prints matrix of edges as matrix (vertices + 1) x (vertices + 1)
-// where upper row and left column are indexes of from and to vertices
+// prints matrix of edges as matrix vertices x vertices
 // each cell contains the weight of edge between them
 // 'inf' if edge does not exist
 void printNeighbourMatrix(NeighbourMatrix* matrix, int vertices);

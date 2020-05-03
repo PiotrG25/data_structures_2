@@ -5,8 +5,9 @@
 
 Edge** prim(NeighbourList** lists, int edges, int vertices, int& resultWeight) {
 	Edge** result = new Edge * [vertices - 1];
-	int resultIndex = 0;
-	resultWeight = 0;
+	int resultIndex = 0; // used for placing result edges in result array
+	resultWeight = 0; // weight of result apannig tree
+
 	PQ* pq = new PQ(2 * edges);
 	UnionFind* uf = new UnionFind(vertices);
 
@@ -20,7 +21,7 @@ Edge** prim(NeighbourList** lists, int edges, int vertices, int& resultWeight) {
 
 		if (!uf->areInOneUnion(start, end)) {
 			uf->unify(start, end);
-			result[resultIndex++] = e;
+			result[resultIndex++] = e->copy();
 			resultWeight += weight;
 
 			while (lists[end]->hasNext()) pq->enqueue(lists[end]->getNext());

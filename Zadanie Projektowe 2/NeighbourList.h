@@ -42,7 +42,7 @@ public:
 
 	// iterator methods
 	// sets iterator to point to head of the list
-	Edge* resetIterator();
+	void resetIterator();
 	// returns pointer to edge at which iterator is pointing
 	// and moves iterator to next
 	Edge* getNext();

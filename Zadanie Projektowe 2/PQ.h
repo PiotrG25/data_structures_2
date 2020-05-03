@@ -9,6 +9,7 @@
 // Priority Queue for Edges
 // implemented with MIN-HEAP
 // priority depends on weight, the smaller the weight, the higher the priority
+// does not copy of delete edges stored in it
 class PQ {
 
 	int length; // length of the array

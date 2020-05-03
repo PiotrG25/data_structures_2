@@ -29,25 +29,30 @@ int main() {
 	}
 
 	NeighbourList** lists = NeighbourList::makeNeighbourLists(arr, edges, vertices);
-	NeighbourList::printNeighbourLists(lists, vertices);
+	printNeighbourLists(lists, vertices);
 	NeighbourMatrix* matrix = NeighbourMatrix::makeNeighbourMatrix(arr, edges, vertices);
-	NeighbourMatrix::printNeighbourMatrix(matrix, vertices);
+	printNeighbourMatrix(matrix, vertices);
 
 
 	int resultWeight = 0;
 	Edge** result = prim(lists, edges, vertices, resultWeight);
 
-	cout << "result:" << endl;
+	cout << "result: " << resultWeight << endl;
 
-	delete lists;
+	for (int i = 0; i < vertices; i++) delete lists[i];
+	delete[] lists;
 	delete matrix;
 
-	cout << "result:" << endl;
+	cout << "result: " << resultWeight << endl;
 
-	lists = NeighbourList::makeNeighbourLists(result, edges, vertices);
-	NeighbourList::printNeighbourLists(lists, vertices);
-	matrix = NeighbourMatrix::makeNeighbourMatrix(result, edges, vertices);
-	NeighbourMatrix::printNeighbourMatrix(matrix, vertices);
+	lists = NeighbourList::makeNeighbourLists(result, vertices - 1, vertices);
+	cout << "result: " << resultWeight << endl;
+	printNeighbourLists(lists, vertices);
+	cout << "result: " << resultWeight << endl;
+	matrix = NeighbourMatrix::makeNeighbourMatrix(result, vertices - 1, vertices);
+	cout << "result: " << resultWeight << endl;
+	printNeighbourMatrix(matrix, vertices);
+	cout << "result: " << resultWeight << endl;
 
 	return 0;
 }
