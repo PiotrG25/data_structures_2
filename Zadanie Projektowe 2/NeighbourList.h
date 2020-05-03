@@ -7,7 +7,7 @@
 #include "Edge.h"
 
 // NeighbourList holds edges of a vertex (from)
-// 
+// can be created only with static method
 
 class NeighbourList {
 	struct Element {
