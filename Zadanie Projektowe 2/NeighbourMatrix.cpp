@@ -52,7 +52,7 @@ NeighbourMatrix* NeighbourMatrix::makeNeighbourMatrix(Edge** arr, int edges, int
 	return matrix;
 }
 
-void NeighbourMatrix::printNeighbourMatrix(NeighbourMatrix* matrix, int vertices) {
+void printNeighbourMatrix(NeighbourMatrix* matrix, int vertices) {
 	for (int i = 0; i < vertices; i++) {
 		for (int j = 0; j < vertices; j++) {
 			Edge* e = matrix->get(i, j);
