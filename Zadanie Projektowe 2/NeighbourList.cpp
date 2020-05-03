@@ -41,7 +41,7 @@ void NeighbourList::add(Edge* e) {
 }
 
 
-NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int vertices) {
+NeighbourList** NeighbourList::makeBidirectionalNeighbourLists(Edge** arr, int edges, int vertices) {
 
 	NeighbourList** lists = new NeighbourList*[vertices];
 	for (int i = 0; i < vertices; i++) lists[i] = new NeighbourList(i);

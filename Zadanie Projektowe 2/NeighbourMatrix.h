@@ -24,7 +24,7 @@ public:
 	~NeighbourMatrix();
 
 	// Makes Neighbour Matrix with copies of edges from the array
-	static NeighbourMatrix* makeNeighbourMatrix(Edge** arr, int edges, int vertices);
+	static NeighbourMatrix* makeBidirectionalNeighbourMatrix(Edge** arr, int edges, int vertices);
 
 	// returns pointer to edge at designated position
 	Edge* get(int i, int j);

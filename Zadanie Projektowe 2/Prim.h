@@ -8,7 +8,8 @@
 #include "NeighbourList.h"
 #include "NeighbourMatrix.h"
 
-
+// Prim's Minimal Spanning Tree Algorithm
+// Both work on bidirectional representations on a graph
 Edge** prim(NeighbourList** lists, int edges, int vertices, int& resultWeight);
 Edge** prim(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight);
 

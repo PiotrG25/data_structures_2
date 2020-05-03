@@ -34,7 +34,7 @@ void NeighbourMatrix::set(int i, int j, Edge* e) {
 }
 
 
-NeighbourMatrix* NeighbourMatrix::makeNeighbourMatrix(Edge** arr, int edges, int vertices) {
+NeighbourMatrix* NeighbourMatrix::makeBidirectionalNeighbourMatrix(Edge** arr, int edges, int vertices) {
 	NeighbourMatrix* matrix = new NeighbourMatrix(vertices);
 
 	for (int i = 0; i < edges; i++) {

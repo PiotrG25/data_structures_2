@@ -28,29 +28,7 @@ int main() {
 		arr[i] = new Edge(start, end, weight);
 	}
 
-	NeighbourList** lists = NeighbourList::makeNeighbourLists(arr, edges, vertices);
-	printNeighbourLists(lists, vertices);
-	NeighbourMatrix* matrix = NeighbourMatrix::makeNeighbourMatrix(arr, edges, vertices);
-	printNeighbourMatrix(matrix, vertices);
-
-
-	int resultWeight = 0;
-	Edge** result = kruskal(lists, edges, vertices, resultWeight);
-
-	for (int i = 0; i < vertices; i++) delete lists[i];
-	delete[] lists;
-	delete matrix;
-
-	cout << "result: " << resultWeight << endl;
-
-	lists = NeighbourList::makeNeighbourLists(result, vertices - 1, vertices);
-	printNeighbourLists(lists, vertices);
-	matrix = NeighbourMatrix::makeNeighbourMatrix(result, vertices - 1, vertices);
-	printNeighbourMatrix(matrix, vertices);
-
-	for (int i = 0; i < vertices; i++) delete lists[i];
-	delete[] lists;
-	delete matrix;
+	
 
 	return 0;
 }

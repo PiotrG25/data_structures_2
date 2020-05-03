@@ -38,7 +38,7 @@ public:
 	~NeighbourList();
 
 	// Makes Neighbour Lists from copies of edges in the array
-	static NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices);
+	static NeighbourList** makeBidirectionalNeighbourLists(Edge** arr, int edges, int vertices);
 
 	// iterator methods
 	// sets iterator to point to head of the list
