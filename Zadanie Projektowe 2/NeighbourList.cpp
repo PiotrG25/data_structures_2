@@ -69,7 +69,7 @@ NeighbourList** NeighbourList::makeDirectionalNeighbourLists(Edge** arr, int edg
 	// Copying edges into lists
 	for (int i = 0; i < edges; i++) {
 		Edge* e = arr[i]->copy();
-		lists[e->getStart]->add(e);
+		lists[e->getStart()]->add(e);
 	}
 
 	return lists;
