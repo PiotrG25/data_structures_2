@@ -28,10 +28,10 @@ int main() {
 		arr[i] = new Edge(start, end, weight);
 	}
 
-	NeighbourList** lists = makeNeighbourLists(arr, edges, vertices);
-	printNeighbourLists(lists, vertices);
-	NeighbourMatrix* matrix = makeNeighbourMatrix(arr, edges, vertices);
-	printNeighbourMatrix(matrix, vertices);
+	NeighbourList** lists = NeighbourList::makeNeighbourLists(arr, edges, vertices);
+	NeighbourList::printNeighbourLists(lists, vertices);
+	NeighbourMatrix* matrix = NeighbourMatrix::makeNeighbourMatrix(arr, edges, vertices);
+	NeighbourMatrix::printNeighbourMatrix(matrix, vertices);
 
 
 	int resultWeight = 0;
@@ -44,10 +44,10 @@ int main() {
 
 	cout << "result:" << endl;
 
-	lists = makeNeighbourLists(result, edges, vertices);
-	printNeighbourLists(lists, vertices);
-	matrix = makeNeighbourMatrix(result, edges, vertices);
-	printNeighbourMatrix(matrix, vertices);
+	lists = NeighbourList::makeNeighbourLists(result, edges, vertices);
+	NeighbourList::printNeighbourLists(lists, vertices);
+	matrix = NeighbourMatrix::makeNeighbourMatrix(result, edges, vertices);
+	NeighbourMatrix::printNeighbourMatrix(matrix, vertices);
 
 	return 0;
 }

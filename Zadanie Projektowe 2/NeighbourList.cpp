@@ -20,18 +20,18 @@ NeighbourList::NeighbourList(int from) {
 }
 
 NeighbourList::~NeighbourList() {
-	Element* next = head;
-	while (next != nullptr) {
-		next = next->next;
+	it = head;
+	while (it != nullptr) {
+		it = it->next;
 		delete head;
-		head = next;
+		head = it;
 	}
 }
 
 
 void NeighbourList::add(Edge* e) {
 	if (tail == nullptr) {
-		head = tail = new Element(e);
+		head = tail = it = new Element(e);
 		return;
 	}
 
@@ -61,17 +61,30 @@ NeighbourList** NeighbourList::makeNeighbourLists(Edge** arr, int edges, int ver
 	return lists;
 }
 
-void NeighbourList::printNeighbourLists(NeighbourList** lists, int vertices) {
+
+Edge* NeighbourList::resetIterator() {
+	it = head;
+}
+Edge* NeighbourList::getNext() {
+	if (it == nullptr) throw std::exception();
+	Edge* e = it->e;
+	it = it->next;
+	return e;
+}
+bool NeighbourList::hasNext() {
+	return it == nullptr;
+}
+
+void printNeighbourLists(NeighbourList** lists, int vertices) {
 	for (int i = 0; i < vertices; i++) {
 		std::cout << i;
 
 		// iterator of elements
-		Element* it = lists[i]->head;
+		lists[i]->resetIterator();
 
-		while(it != nullptr) {
-			Edge* e = it->e;
+		while(lists[i]->hasNext()) {
+			Edge* e = lists[i]->getNext();
 			std::cout << ' ' << '(' << e->getEnd() << ',' << ' ' << e->getWeight() << ')';
-			it = it->next;
 		}
 		std::cout << std::endl;
 	}

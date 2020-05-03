@@ -21,8 +21,8 @@ class NeighbourList {
 	// starting vertex index
 	// size of the list
 	int from, size;
-	// head and tail pointer of the list
-	Element* head, * tail;
+	// head tail and iterator pointers of the list
+	Element* head, * tail, * it;
 
 	NeighbourList();
 	NeighbourList(int from);
@@ -40,12 +40,21 @@ public:
 	// Makes Neighbour Lists from copies of edges in the array
 	static NeighbourList** makeNeighbourLists(Edge** arr, int edges, int vertices);
 
-	// prints for each list list of edges in format:
-	// j (v1, w1), (v2, w2), ...
-	// where j is index of from vertex
-	// vi and wi are index of neighbouring vertex and weight of egdge between
-	static void printNeighbourLists(NeighbourList** lists, int vertices);
+	// iterator methods
+	// sets iterator to point to head of the list
+	Edge* resetIterator();
+	// returns pointer to edge at which iterator is pointing
+	// and moves iterator to next
+	Edge* getNext();
+	// checks if iterator doesnt point to nullptr
+	bool hasNext();
 };
+
+// prints for each list list of edges in format:
+// j (v1, w1), (v2, w2), ...
+// where j is index of from vertex
+// vi and wi are index of neighbouring vertex and weight of egdge between
+void printNeighbourLists(NeighbourList** lists, int vertices);
 
 
 #endif
