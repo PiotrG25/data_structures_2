@@ -43,11 +43,11 @@ void NeighbourList::add(Edge* e) {
 
 NeighbourList** NeighbourList::makeBidirectionalNeighbourLists(Edge** arr, int edges, int vertices) {
 
-	NeighbourList** lists = new NeighbourList*[vertices];
+	NeighbourList** lists = new NeighbourList * [vertices];
 	for (int i = 0; i < vertices; i++) lists[i] = new NeighbourList(i);
 
+	// Copying edges into lists
 	for (int i = 0; i < edges; i++) {
-		// Duplicating edges
 		// Undirected graph will now be bidirectional
 
 		Edge* e1 = arr[i]->copy();
@@ -56,6 +56,20 @@ NeighbourList** NeighbourList::makeBidirectionalNeighbourLists(Edge** arr, int e
 
 		lists[e1->getStart()]->add(e1);
 		lists[e2->getStart()]->add(e2);
+	}
+
+	return lists;
+}
+
+NeighbourList** NeighbourList::makeDirectionalNeighbourLists(Edge** arr, int edges, int vertices) {
+	
+	NeighbourList** lists = new NeighbourList * [vertices];
+	for (int i = 0; i < vertices; i++) lists[i] = new NeighbourList(i);
+
+	// Copying edges into lists
+	for (int i = 0; i < edges; i++) {
+		Edge* e = arr[i]->copy();
+		lists[e->getStart]->add(e);
 	}
 
 	return lists;

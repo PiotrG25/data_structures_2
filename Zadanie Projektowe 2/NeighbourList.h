@@ -37,8 +37,11 @@ public:
 	// deletes all Elements and Edges within these elements
 	~NeighbourList();
 
-	// Makes Neighbour Lists from copies of edges in the array
+	// Make Neighbour Lists from copies of edges in the array
+	// Bidirectional
 	static NeighbourList** makeBidirectionalNeighbourLists(Edge** arr, int edges, int vertices);
+	// Directional
+	static NeighbourList** makeDirectionalNeighbourLists(Edge** arr, int edges, int vertices);
 
 	// iterator methods
 	// sets iterator to point to head of the list
