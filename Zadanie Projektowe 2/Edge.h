@@ -14,6 +14,11 @@ public:
 
 	Edge* copy(); // creates new object with the same attributes
 	void reverse(); // swaps start with end
+
+	// used to compare priority between edges
+	// priority depends on weight, the smaller the weight, the higher the priority
+	// returns true if operand on the left has higher priority
+	bool operator > (Edge& e);
 };
 
 // sorts edges in ascending orber by weights

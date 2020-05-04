@@ -8,7 +8,7 @@ Edge** prim(NeighbourList** lists, int edges, int vertices, int& resultWeight) {
 	int resultIndex = 0; // used for placing result edges in result array
 	resultWeight = 0; // weight of result spannig tree
 
-	PQ* pq = new PQ(2 * edges);
+	EdgePQ* pq = new EdgePQ(2 * edges);
 	UnionFind* uf = new UnionFind(vertices);
 
 	// copying pointers of edges from vertex 0
@@ -46,7 +46,7 @@ Edge** prim(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight)
 	int resultIndex = 0; // used for placing result edges in result array
 	resultWeight = 0; // weight of result spannig tree
 
-	PQ* pq = new PQ(2 * edges);
+	EdgePQ* pq = new EdgePQ(2 * edges);
 	UnionFind* uf = new UnionFind(vertices);
 
 	Edge* e; // pointer for current Edge

@@ -49,3 +49,7 @@ void Edge::reverse() {
 	end = t;
 }
 
+
+bool Edge::operator > (Edge& e) {
+	return this->weight < e.weight;
+}

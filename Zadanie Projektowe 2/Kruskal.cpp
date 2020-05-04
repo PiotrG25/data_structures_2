@@ -8,7 +8,7 @@ Edge** kruskal(NeighbourList** lists, int edges, int vertices, int& resultWeight
 	int resultIndex = 0; // used for placing result edges in result array
 	resultWeight = 0; // weight of result spannig tree
 
-	PQ* pq = new PQ(2 * edges);
+	EdgePQ* pq = new EdgePQ(2 * edges);
 	UnionFind* uf = new UnionFind(vertices);
 
 	Edge* e; // pointer for current Edge
@@ -33,6 +33,9 @@ Edge** kruskal(NeighbourList** lists, int edges, int vertices, int& resultWeight
 			resultWeight += e->getWeight();
 		}
 	}
+
+	delete pq;
+	delete uf;
 	
 	return result;
 }
@@ -42,7 +45,7 @@ Edge** kruskal(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeig
 	int resultIndex = 0; // used for placing result edges in result array
 	resultWeight = 0; // weight of result spannig tree
 
-	PQ* pq = new PQ(2 * edges);
+	EdgePQ* pq = new EdgePQ(2 * edges);
 	UnionFind* uf = new UnionFind(vertices);
 
 	Edge* e; // pointer for current Edge
@@ -69,6 +72,9 @@ Edge** kruskal(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeig
 			resultWeight += e->getWeight();
 		}
 	}
+
+	delete pq;
+	delete uf;
 
 	return result;
 }
