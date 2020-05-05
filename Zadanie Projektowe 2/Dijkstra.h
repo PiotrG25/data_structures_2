@@ -8,7 +8,21 @@
 #include "NeighbourList.h"
 #include "NeighbourMatrix.h"
 
-int** dijkstra(NeighbourList** lists, int edges, int vertices, int start);
-int** dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start);
+struct VertexDistance {
+	int vertex, distance;
+
+	VertexDistance(int vertex, int distance);
+
+	bool operator > (VertexDistance& vd);
+};
+
+typedef PQ<VertexDistance> VertexDistancePQ;
+
+
+const int INF = 2147483647;
+
+
+int* dijkstra(NeighbourList** lists, int edges, int vertices, int start);
+int* dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start);
 
 #endif

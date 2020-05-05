@@ -2,6 +2,8 @@
 #ifndef EDGE_H
 #define EDGE_H
 
+#include "PQ.h"
+
 class Edge {
 	int start, end, weight;
 public:
@@ -21,7 +23,6 @@ public:
 	bool operator > (Edge& e);
 };
 
-// sorts edges in ascending orber by weights
-void qsortEdges(Edge* edges, int left, int right);
+typedef PQ<Edge> EdgePQ;
 
 #endif

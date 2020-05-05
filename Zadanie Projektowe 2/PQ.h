@@ -4,7 +4,6 @@
 
 #include <iostream>
 
-#include "Edge.h"
 
 // Priority Queue
 // implemented with MAX-HEAP - element with highest priority ends up on top
@@ -110,10 +109,19 @@ public:
 	
 	// creates PQ of fixed size
 	PQ(int size) {
-		this->length = size;
-		this->arr = new C * [this->length];
-		for (int i = 0; i < length; i++) arr[i] = nullptr;
+		length = size;
+		arr = new C * [length];
 		this->size = 0;
+
+		for (int i = 0; i < length; i++) arr[i] = nullptr;
+	}
+	PQ(C** arr, int size) {
+		length = size;
+		this->arr = new C * [length];
+		this->size = size;
+
+		for (int i = 0; i < length; i++) this->arr[i] = arr[i];
+		restoreHeapInvariant();
 	}
 	~PQ() {
 		delete[] arr;
@@ -139,13 +147,17 @@ public:
 		return e;
 	}
 
+	// Floyd's algorithm for restoring heap invariant O(n)
+	void restoreHeapInvariant() {
+		// for each node having at least one child
+		// call bubbleDown method
+		// each next tree then becomes restored and propagates it to the top
+		for (int i = parentIndexOf(size - 1); i >= 0; i--) bubbleDown(i);
+	}
 	// returns number of elements in the PQ
 	int getSize() {
 		return size;
 	}
 };
-
-
-typedef PQ<Edge> EdgePQ;
 
 #endif

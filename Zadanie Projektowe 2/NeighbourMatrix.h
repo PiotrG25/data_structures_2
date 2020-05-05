@@ -30,6 +30,7 @@ public:
 	static NeighbourMatrix* makeDirectionalNeighbourMatrix(Edge** arr, int edges, int vertices);
 
 	// returns pointer to edge at designated position
+	// i = edge.start, j = edge.end
 	Edge* get(int i, int j);
 };
 

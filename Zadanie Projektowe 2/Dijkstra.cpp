@@ -1,34 +1,111 @@
 
 #include "Dijkstra.h"
 
-
-int** dijkstra(NeighbourList** lists, int edges, int vertices, int start) {
-
-	// result array holding distance from start to each vertex
-	// nullptr if that value is infinity
-	int** result = new int* [vertices];
-	for (int i = 0; i < vertices; i++) result[i] = nullptr;
-
-	EdgePQ* pq = new EdgePQ(edges);
-
-	// distance to the start
-	result[start] = new int(0);
-
-	// copying pointers to edges beginning at start vertex
-	while (lists[start]->hasNext()) {
-		Edge* e = lists[start]->getNext();
-		pq->enqueue(e);
-	}
-
-
-
-	delete pq;
-
-	return result;
+VertexDistance::VertexDistance(int vertex, int distance) {
+	this->vertex = vertex;
+	this->distance = distance;
 }
 
-int** dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start) {
-	return nullptr;
+bool VertexDistance::operator > (VertexDistance& vd) {
+	return this->distance < vd.distance;
+}
+
+
+int* dijkstra(NeighbourList** lists, int edges, int vertices, int start) {
+	
+	// result array holding distance from start to each vertex
+	int* dist = new int[vertices];
+	for (int i = 0; i < vertices; i++) dist[i] = INF; // infinity
+	dist[start] = 0;
+
+	// vertex is visited, when all of edges beginning with it, have been considered
+	bool* visited = new bool[vertices];
+	for (int i = 0; i < vertices; i++) visited[i] = false;
+	
+
+	// PQ of pairs of vertices and distances
+	// Dijkstra's algorithm uses the next most promising vertex
+	VertexDistancePQ* pq = new VertexDistancePQ(edges);
+	VertexDistance* vd = new VertexDistance(start, 0);
+	pq->enqueue(vd);
+
+
+	for (int i = 0; i < vertices; i++) lists[i]->resetIterator();
+	while (pq->getSize() > 0) {
+		vd = pq->dequeue();
+		int current = vd->vertex;
+
+		if (visited[current]) {
+			delete vd;
+			continue;
+		}
+
+		while (lists[current]->hasNext()) {
+			Edge* e = lists[current]->getNext();
+			int start = e->getStart(), end = e->getEnd(), weight = e->getWeight();
+			if (dist[start] + weight < dist[end]) {
+				dist[end] = dist[start] + weight;
+				pq->enqueue(new VertexDistance(end, dist[end]));
+			}
+		}
+		
+		visited[current] = true;
+		delete vd;
+	}
+
+	delete[]visited;
+	delete pq;
+
+	return dist;
+}
+
+int* dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start) {
+
+	// result array holding distance from start to each vertex
+	int* dist = new int[vertices];
+	for (int i = 0; i < vertices; i++) dist[i] = INF; // infinity
+	dist[start] = 0;
+
+	// vertex is visited, when all of edges beginning with it, have been considered
+	bool* visited = new bool[vertices];
+	for (int i = 0; i < vertices; i++) visited[i] = false;
+
+
+	// PQ of pairs of vertices and distances
+	// Dijkstra's algorithm uses the next most promising vertex
+	VertexDistancePQ* pq = new VertexDistancePQ(edges);
+	VertexDistance* vd = new VertexDistance(start, 0);
+	pq->enqueue(vd);
+
+
+	while (pq->getSize() > 0) {
+		vd = pq->dequeue();
+		int current = vd->vertex;
+
+		if (visited[current]) {
+			delete vd;
+			continue;
+		}
+
+		for (int i = 0; i < vertices; i++) {
+			Edge* e = matrix->get(current, i);
+			if (e == nullptr) continue;
+
+			int start = e->getStart(), end = e->getEnd(), weight = e->getWeight();
+			if (dist[start] + weight < dist[end]) {
+				dist[end] = dist[start] + weight;
+				pq->enqueue(new VertexDistance(end, dist[end]));
+			}
+		}
+
+		visited[current] = true;
+		delete vd;
+	}
+
+	delete[]visited;
+	delete pq;
+
+	return dist;
 }
 
 
