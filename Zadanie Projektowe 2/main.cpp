@@ -15,6 +15,8 @@
 #include "Ford-Bellman.h"
 
 
+void printShortestPath(int** dist, int vertices);
+
 using namespace std;
 
 int main() {
@@ -30,38 +32,51 @@ int main() {
 		cin >> start >> end >> weight;
 		arr[i] = new Edge(start, end, weight);
 	}
-	/*
-	NeighbourList** lists = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
-	printNeighbourLists(lists, vertices);
-	NeighbourMatrix* matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(arr, edges, vertices);
-	printNeighbourMatrix(matrix, vertices);
-	*/
 	
-	NeighbourList** lists = NeighbourList::makeBidirectionalNeighbourLists(arr, edges, vertices);
-	printNeighbourLists(lists, vertices);
-	NeighbourMatrix* matrix = NeighbourMatrix::makeBidirectionalNeighbourMatrix(arr, edges, vertices);
-	printNeighbourMatrix(matrix, vertices);
+	NeighbourList** dilists = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
+	printNeighbourLists(dilists, vertices);
+	NeighbourMatrix* dimatrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(arr, edges, vertices);
+	printNeighbourMatrix(dimatrix, vertices);
+	
+	NeighbourList** bilists = NeighbourList::makeBidirectionalNeighbourLists(arr, edges, vertices);
+	printNeighbourLists(bilists, vertices);
+	NeighbourMatrix* bimatrix = NeighbourMatrix::makeBidirectionalNeighbourMatrix(arr, edges, vertices);
+	printNeighbourMatrix(bimatrix, vertices);
 
 	for (int i = 0; i < vertices; i++) {
-		int** result = fordBellman(matrix, edges, vertices, i);
-
-		for (int j = 0; j < vertices; j++) {
-			cout << *result[j] << ' ';
-		}
-		cout << endl;
-
-		for (int j = 0; j < vertices; j++) delete result[j];
+		int** result = dijkstra(bimatrix, edges, vertices, i);
+		printShortestPath(result, vertices);
+		for (int j = 0; j < vertices; j++) if (result[j] != nullptr) delete result[j];
 		delete[] result;
 	}
 
 	
 
 
-	for (int i = 0; i < vertices; i++) delete lists[i];
-	delete[] lists;
-	delete matrix;
+
+
+	for (int i = 0; i < vertices; i++) {
+		delete dilists[i];
+		delete bilists[i];
+	}
+	delete[] dilists;
+	delete[] bilists;
+	delete dimatrix;
+	delete bimatrix;
 	
 
 	return 0;
+}
+
+void printShortestPath(int** dist, int vertices) {
+	for (int i = 0; i < vertices; i++) {
+		if (dist[i] == nullptr) {
+			cout << "inf";
+		}
+		else {
+			cout << *dist[i] << ' ';
+		}
+	}
+	cout << endl;
 }
 

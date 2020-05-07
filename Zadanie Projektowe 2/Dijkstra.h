@@ -19,10 +19,7 @@ struct VertexDistance {
 typedef PQ<VertexDistance> VertexDistancePQ;
 
 
-const int INF = 2147483647;
-
-
-int* dijkstra(NeighbourList** lists, int edges, int vertices, int start);
-int* dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start);
+int** dijkstra(NeighbourList** lists, int edges, int vertices, int start);
+int** dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start);
 
 #endif
