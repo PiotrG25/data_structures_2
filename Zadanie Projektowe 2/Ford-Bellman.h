@@ -9,5 +9,8 @@
 #include "NeighbourMatrix.h"
 
 
+int** fordBellman(NeighbourList** lists, int edges, int vertices, int start);
+int** fordBellman(NeighbourMatrix* matrix, int edges, int vertices, int start);
+
 
 #endif

@@ -30,13 +30,41 @@ int main() {
 		cin >> start >> end >> weight;
 		arr[i] = new Edge(start, end, weight);
 	}
+	/*
+	NeighbourList** lists = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
+	printNeighbourLists(lists, vertices);
+	NeighbourMatrix* matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(arr, edges, vertices);
+	printNeighbourMatrix(matrix, vertices);
 
+	int** result = fordBellman(lists, edges, vertices, 0);
+	for (int j = 0; j < vertices; j++) {
+		if (result[j] == nullptr) {
+			cout << "inf ";
+		}
+		else {
+			cout << *result[j] << ' ';
+		}
+	}
+	cout << endl;
+	*/
+	/*
 	NeighbourList** lists = NeighbourList::makeBidirectionalNeighbourLists(arr, edges, vertices);
 	printNeighbourLists(lists, vertices);
 	NeighbourMatrix* matrix = NeighbourMatrix::makeBidirectionalNeighbourMatrix(arr, edges, vertices);
 	printNeighbourMatrix(matrix, vertices);
 
-	dijkstra(lists, edges, vertices, 0);
+	for (int i = 0; i < vertices; i++) {
+		int** result = fordBellman(lists, edges, vertices, i);
+
+		for (int j = 0; j < vertices; j++) {
+			cout << *result[j] << ' ';
+		}
+		cout << endl;
+
+		for (int j = 0; j < vertices; j++) delete result[j];
+		delete[] result;
+	}
+	*/
 
 	
 	/*
