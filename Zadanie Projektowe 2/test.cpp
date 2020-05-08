@@ -5,23 +5,17 @@
 
 Edge** makeRandomGraph(int vertices, int edges) {
 	
-	
-}
-
-Edge** makeSpanningTree(int vertices) {
-
-	Edge** arr = new Edge * [vertices - 1];
-	int* nextVertices = makeRandomArray(vertices);
-
-	for (int i = 1; i < vertices; i++) {
-		// get random index of vertex from the tree
-		int r = rand() % i;
-		// connect next random vertex to the tree
-		arr[i - 1] = new Edge(nextVertices[r], nextVertices[i], rand() % vertices + 1);
+	Edge** allEdges = new Edge * [vertices * (vertices - 1)];
+	for (int i = 0; i < vertices; i++) {
+		for (int j = 0; j < i; j++) {
+			allEdges[i * vertices + j] = new Edge(i, j, )
+		}
 	}
 
-	delete nextVertices;
-	return arr;
+	// start by creating of a spanning tree
+
+	
+	
 }
 
 int* makeRandomArray(int size) {

@@ -21,6 +21,6 @@
 int* makeRandomArray(int size);
 
 Edge** makeRandomGraph(int vertices, int edges);
-Edge** makeSpanningTree(int vertices);
+Edge** makeRandomSpanningTree(int vertices);
 
 #endif
