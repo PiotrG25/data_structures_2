@@ -23,8 +23,8 @@ Edge** prim(NeighbourList** lists, int edges, int vertices, int& resultWeight) {
 		int start = e->getStart(), end = e->getEnd(), weight = e->getWeight();
 
 		// if vertices indexed by start and end are not connected yet
-		// adding edge to the result
-		// and increasing value of the weight of the result spanning tree
+		// add edge to the result
+		// and increase the value of the weight of the result spanning tree
 		if (!uf->areInOneUnion(start, end)) {
 			uf->unify(start, end);
 			result[resultIndex++] = e->copy();
@@ -63,8 +63,8 @@ Edge** prim(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight)
 		int start = e->getStart(), end = e->getEnd(), weight = e->getWeight();
 
 		// if vertices indexed by start and end are not connected yet
-		// adding edge to the result
-		// and increasing value of the weight of the result spanning tree
+		// add edge to the result
+		// and increase the value of the weight of the result spanning tree
 		if (!uf->areInOneUnion(start, end)) {
 			uf->unify(start, end);
 			result[resultIndex++] = e->copy();
