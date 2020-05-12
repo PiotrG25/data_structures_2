@@ -8,7 +8,8 @@
 #include "NeighbourList.h"
 #include "NeighbourMatrix.h"
 
-
+// Kruskal's Minimal Spanning Tree Algorithm
+// Both work on bidirectional representations of a graph
 Edge** kruskal(NeighbourList** lists, int edges, int vertices, int& resultWeight);
 Edge** kruskal(NeighbourMatrix* matrix, int edges, int vertices, int& resultWeight);
 
