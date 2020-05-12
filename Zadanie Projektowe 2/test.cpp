@@ -4,9 +4,22 @@
 
 
 
+void test(int baseVertices, int incrementVertices, double density) {
+	testPrimList(baseVertices, incrementVertices, density);
+	testPrimMatrix(baseVertices, incrementVertices, density);
+
+	testKruskalList(baseVertices, incrementVertices, density);
+	testKruskalMatrix(baseVertices, incrementVertices, density);
+
+	testDijkstraList(baseVertices, incrementVertices, density);
+	testDijkstraMatrix(baseVertices, incrementVertices, density);
+
+	testFordBellmanList(baseVertices, incrementVertices, density);
+	testFordBellmanMatrix(baseVertices, incrementVertices, density);
+}
 
 void testPrimList(int baseVertices, int incrementVertices, double density) {
-	std::cout << "Prim test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
+	std::cout << "Prim list test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 	
 
 	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
@@ -41,7 +54,7 @@ void testPrimList(int baseVertices, int incrementVertices, double density) {
 		result /= samples;
 		delete[] sampleResults;
 
-		std::string txt = "primList.txt";
+		std::string txt = "Prim list.txt";
 		std::cout << txt << ' ' << result << std::endl;
 
 		std::ofstream os;
@@ -51,28 +64,314 @@ void testPrimList(int baseVertices, int incrementVertices, double density) {
 	}
 }
 void testPrimMatrix(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Prim matrix test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourMatrix* matrix = NeighbourMatrix::makeBidirectionalNeighbourMatrix(graph, edges, vertices);
+			int resultWeight;
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			Edge** result = prim(matrix, edges, vertices, resultWeight);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete matrix;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Prim matrix.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 
 void testKruskalList(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Kruskal list test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourList** lists = NeighbourList::makeBidirectionalNeighbourLists(graph, edges, vertices);
+			int resultWeight;
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			Edge** result = kruskal(lists, edges, vertices, resultWeight);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < vertices; j++) delete lists[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete[] lists;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Kruskal list.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 void testKruskalMatrix(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Kruskal matrix test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourMatrix* matrix = NeighbourMatrix::makeBidirectionalNeighbourMatrix(graph, edges, vertices);
+			int resultWeight;
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			Edge** result = kruskal(matrix, edges, vertices, resultWeight);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete matrix;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Kruskal matrix.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 
 void testDijkstraList(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Dijkstra list test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourList** lists = NeighbourList::makeDirectionalNeighbourLists(graph, edges, vertices);
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			int** result = dijkstra(lists, edges, vertices, rand() % vertices);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < vertices; j++) delete lists[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete[] lists;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Dijkstra list.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 void testDijkstraMatrix(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Dijkstra matrix test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourMatrix* matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(graph, edges, vertices);
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			int** result = dijkstra(matrix, edges, vertices, rand() % vertices);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete matrix;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Dijkstra matrix.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 
 void testFordBellmanList(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Ford-Bellman list test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourList** lists = NeighbourList::makeDirectionalNeighbourLists(graph, edges, vertices);
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			int** result = fordBellman(lists, edges, vertices, rand() % vertices);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < vertices; j++) delete lists[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete[] lists;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Ford-Bellman list.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 void testFordBellmanMatrix(int baseVertices, int incrementVertices, double density) {
+	std::cout << "Ford-Bellman matrix test for " << baseVertices << " " << incrementVertices << ' ' << std::fixed << std::setprecision(2) << density << std::endl;
 
+
+	for (int vertices = baseVertices; vertices < baseVertices + 7 * incrementVertices; vertices += incrementVertices) {
+		int samples = 100;
+		double* sampleResults = new double[samples];
+		int edges = vertices * (vertices - 1) / 2 * density;
+
+
+		for (int i = 0; i < samples; i++) {
+			Edge** graph = makeRandomGraph(edges, vertices);
+			NeighbourMatrix* matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(graph, edges, vertices);
+
+			auto t1 = std::chrono::high_resolution_clock::now();
+			int** result = fordBellman(matrix, edges, vertices, rand() % vertices);
+			auto t2 = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> t = t2 - t1;
+			sampleResults[i] = t.count();
+
+			for (int j = 0; j < vertices - 1; j++) delete result[j];
+			for (int j = 0; j < edges; j++) delete graph[j];
+			delete[] result;
+			delete matrix;
+			delete[] graph;
+		}
+
+		double result = 0;
+		for (int i = 0; i < samples; i++) {
+			result += sampleResults[i];
+		}
+		result /= samples;
+		delete[] sampleResults;
+
+		std::string txt = "Ford-Bellman matrix.txt";
+		std::cout << txt << ' ' << result << std::endl;
+
+		std::ofstream os;
+		os.open(txt, std::ios::out | std::ios::app);
+		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os.close();
+	}
 }
 
 

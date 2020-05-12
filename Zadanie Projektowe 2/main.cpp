@@ -25,27 +25,11 @@ using namespace std;
 int main() {
 	cout << "Hello, World!" << endl;
 
-	testPrimList(100, 100, 0.2);
+	test(100, 100, 0.2);
+	test(100, 100, 0.6);
+	test(100, 100, 0.99);
 
-
-	/*
-	int vertices = 6;
-	int min_edges = vertices - 1;
-	int max_edges = vertices * (vertices - 1) / 2;
-	for (int edges = min_edges; edges <= max_edges; edges++) {
-		cout << edges << endl;
-		for (int i = 0; i < 3; i++) {
-			Edge** arr = makeRandomGraph(edges, vertices);
-			NeighbourList** nl = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
-			printNeighbourLists(nl, vertices);
-
-			for (int j = 0; j < edges; j++) delete arr[j];
-			delete[] arr;
-			for (int j = 0; j < vertices; j++) delete nl[j];
-			delete[] nl;
-		}
-		cout << endl;
-	}*/
+	
 	
 }
 

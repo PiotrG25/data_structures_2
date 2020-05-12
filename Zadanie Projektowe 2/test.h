@@ -26,6 +26,8 @@ int* makeRandomArray(int size);
 Edge** makeRandomGraph(int edges, int vertices);
 
 
+void test(int baseVertices, int incrementVertices, double density);
+
 void testPrimList(int baseVertices, int incrementVertices, double density);
 void testPrimMatrix(int baseVertices, int incrementVertices, double density);
 
