@@ -25,6 +25,10 @@ using namespace std;
 int main() {
 	cout << "Hello, World!" << endl;
 
+	testPrimList(100, 100, 0.2);
+
+
+	/*
 	int vertices = 6;
 	int min_edges = vertices - 1;
 	int max_edges = vertices * (vertices - 1) / 2;
@@ -41,7 +45,7 @@ int main() {
 			delete[] nl;
 		}
 		cout << endl;
-	}
+	}*/
 	
 }
 
