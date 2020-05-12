@@ -177,7 +177,11 @@ void doShortestPath() {
 		\r[5] - Algorytm Forda-Bellmana\n\
 		";
 	Edge** arr = nullptr;
+	NeighbourList** lists = nullptr;
+	NeighbourMatrix* matrix = nullptr;
 	int edges = 0, vertices = 0, start;
+
+	int** result;
 
 	int choice;
 	do {
@@ -185,18 +189,100 @@ void doShortestPath() {
 		cin >> choice;
 		switch (choice) {
 		case 1:
+			if (arr != nullptr) {
+				for (int i = 0; i < edges; i++) delete arr[i];
+				delete[] arr;
+			}
+
 			arr = readShortestPathFromFile(edges, vertices, start);
+			lists = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
+			matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(arr, edges, vertices);
 			break;
 		case 2:
+			if (arr != nullptr) {
+				for (int i = 0; i < edges; i++) delete arr[i];
+				delete[] arr;
+			}
+
+			double density;
+			cout << "Podaj ilosc wierzcholkow i gestosc" << endl;
+			cin >> vertices >> density;
+			edges = vertices * (vertices - 1) / 2 * density;
+			arr = makeRandomGraph(edges, vertices);
+			lists = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
+			matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(arr, edges, vertices);
+			start = rand() % vertices;
 			break;
 		case 3:
+			if (arr == nullptr) {
+				cout << "BRAK GRAFU!!!" << endl;
+				break;
+			}
+			printNeighbourLists(lists, vertices);
+			printNeighbourMatrix(matrix, vertices);
 			break;
 		case 4:
+			if (arr == nullptr) {
+				cout << "BRAK GRAFU!!!" << endl;
+				break;
+			}
+
+			result = dijkstra(lists, edges, vertices, start);
+			cout << "Wynik algorytmu Dijkstry dla reprezentacji listowej dla startu: " << start << endl;
+			printShortestPath(result, vertices);
+			cout << endl;
+
+			for (int i = 0; i < vertices; i++) {
+				if(result[i] != nullptr) delete result[i];
+			}
+			delete[] result;
+
+			result = dijkstra(matrix, edges, vertices, start);
+			cout << "Wynik algorytmu Dijkstry dla reprezentacji macierzowej dla startu: " << start << endl;
+			printShortestPath(result, vertices);
+			cout << endl;
+
+			for (int i = 0; i < vertices; i++) {
+				if (result[i] != nullptr) delete result[i];
+			}
+			delete[] result;
 			break;
 		case 5:
+			if (arr == nullptr) {
+				cout << "BRAK GRAFU!!!" << endl;
+				break;
+			}
+
+			result = fordBellman(lists, edges, vertices, start);
+			cout << "Wynik algorytmu Forda-Bellmana dla reprezentacji listowej dla startu: " << start << endl;
+			printShortestPath(result, vertices);
+			cout << endl;
+
+			for (int i = 0; i < vertices; i++) {
+				if (result[i] != nullptr) delete result[i];
+			}
+			delete[] result;
+
+			result = fordBellman(matrix, edges, vertices, start);
+			cout << "Wynik algorytmu Forda-Bellmana dla reprezentacji macierzowej dla startu: " << start << endl;
+			printShortestPath(result, vertices);
+			cout << endl;
+
+			for (int i = 0; i < vertices; i++) {
+				if (result[i] != nullptr) delete result[i];
+			}
+			delete[] result;
 			break;
 		}
 	} while (choice != 0);
+
+	if (arr != nullptr) {
+		for (int i = 0; i < edges; i++) delete arr[i];
+		delete[] arr;
+		for (int i = 0; i < vertices; i++) delete lists[i];
+		delete[] lists;
+		delete matrix;
+	}
 }
 void doMaxFlow() {
 	string menu = "\
@@ -212,7 +298,7 @@ void doMaxFlow() {
 void printShortestPath(int** dist, int vertices) {
 	for (int i = 0; i < vertices; i++) {
 		if (dist[i] == nullptr) {
-			cout << "inf";
+			cout << "inf ";
 		}
 		else {
 			cout << *dist[i] << ' ';
