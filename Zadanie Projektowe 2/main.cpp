@@ -4,6 +4,7 @@
 #define MINUS_INF -2147483648
 
 #include <iostream>
+#include <fstream>
 
 #include "Edge.h"
 #include "NeighbourList.h"
@@ -83,9 +84,13 @@ void doMST() {
 			if (arr != nullptr) {
 				for (int i = 0; i < edges; i++) delete arr[i];
 				delete[] arr;
+				for (int i = 0; i < vertices; i++) delete lists[i];
+				delete[] lists;
+				delete matrix;
 			}
 
 			arr = readMSTFromFile(edges, vertices);
+			if (arr == nullptr) break;
 			lists = NeighbourList::makeBidirectionalNeighbourLists(arr, edges, vertices);
 			matrix = NeighbourMatrix::makeBidirectionalNeighbourMatrix(arr, edges, vertices);
 			break;
@@ -93,6 +98,9 @@ void doMST() {
 			if (arr != nullptr) {
 				for (int i = 0; i < edges; i++) delete arr[i];
 				delete[] arr;
+				for (int i = 0; i < vertices; i++) delete lists[i];
+				delete[] lists;
+				delete matrix;
 			}
 
 			double density;
@@ -119,7 +127,7 @@ void doMST() {
 
 			result = prim(lists, edges, vertices, resultWeight);
 			cout << "Wynik algorytmu Prima dla reprezentacji listowej: " << resultWeight << endl;
-			for (int i = 0; i < edges; i++) {
+			for (int i = 0; i < vertices - 1; i++) {
 				cout << result[i]->getStart() << ' ' << result[i]->getEnd() << ' ' << result[i]->getWeight() << endl;
 				delete result[i];
 			}
@@ -128,7 +136,7 @@ void doMST() {
 
 			result = prim(matrix, edges, vertices, resultWeight);
 			cout << "Wynik algorytmu Prima dla reprezentacji macierzowej: " << resultWeight << endl;
-			for (int i = 0; i < edges; i++) {
+			for (int i = 0; i < vertices - 1; i++) {
 				cout << result[i]->getStart() << ' ' << result[i]->getEnd() << ' ' << result[i]->getWeight() << endl;
 				delete result[i];
 			}
@@ -143,7 +151,7 @@ void doMST() {
 
 			result = kruskal(lists, edges, vertices, resultWeight);
 			cout << "Wynik algorytmu Kruskala dla reprezentacji listowej: " << resultWeight << endl;
-			for (int i = 0; i < edges; i++) {
+			for (int i = 0; i < vertices - 1; i++) {
 				cout << result[i]->getStart() << ' ' << result[i]->getEnd() << ' ' << result[i]->getWeight() << endl;
 				delete result[i];
 			}
@@ -152,7 +160,7 @@ void doMST() {
 
 			result = kruskal(matrix, edges, vertices, resultWeight);
 			cout << "Wynik algorytmu Kruskala dla reprezentacji macierzowej: " << resultWeight << endl;
-			for (int i = 0; i < edges; i++) {
+			for (int i = 0; i < vertices - 1; i++) {
 				cout << result[i]->getStart() << ' ' << result[i]->getEnd() << ' ' << result[i]->getWeight() << endl;
 				delete result[i];
 			}
@@ -196,9 +204,13 @@ void doShortestPath() {
 			if (arr != nullptr) {
 				for (int i = 0; i < edges; i++) delete arr[i];
 				delete[] arr;
+				for (int i = 0; i < vertices; i++) delete lists[i];
+				delete[] lists;
+				delete matrix;
 			}
 
 			arr = readShortestPathFromFile(edges, vertices, start);
+			if (arr == nullptr) break;
 			lists = NeighbourList::makeDirectionalNeighbourLists(arr, edges, vertices);
 			matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(arr, edges, vertices);
 			break;
@@ -206,6 +218,9 @@ void doShortestPath() {
 			if (arr != nullptr) {
 				for (int i = 0; i < edges; i++) delete arr[i];
 				delete[] arr;
+				for (int i = 0; i < vertices; i++) delete lists[i];
+				delete[] lists;
+				delete matrix;
 			}
 
 			double density;
@@ -321,11 +336,71 @@ void printShortestPath(int* dist, int vertices) {
 
 
 Edge** readMSTFromFile(int& edges, int& vertices) {
-	return nullptr;
+	ifstream is;
+	string name;
+	cout << "Podaj nazwe pliku: ";
+	cin >> name;
+
+	is.open(name, ifstream::in);
+
+	if (is.fail()) {
+		cout << "Nie udalo sie otworzyc pliku" << endl;
+		return nullptr;
+	}
+
+	is >> edges >> vertices;
+	Edge** arr = new Edge * [edges];
+	int s, e, w;
+	for (int i = 0; i < edges; i++) {
+		is >> s >> e >> w;
+		arr[i] = new Edge(s, e, w);
+	}
+	is.close();
+	return arr;
 }
 Edge** readShortestPathFromFile(int& edges, int& vertices, int& start) {
-	return nullptr;
+	ifstream is;
+	string name;
+	cout << "Podaj nazwe pliku: ";
+	cin >> name;
+
+	is.open(name, ifstream::in);
+
+	if (is.fail()) {
+		cout << "Nie udalo sie otworzyc pliku" << endl;
+		return nullptr;
+	}
+
+	is >> edges >> vertices >> start;
+	Edge** arr = new Edge * [edges];
+	int s, e, w;
+	for (int i = 0; i < edges; i++) {
+		is >> s >> e >> w;
+		arr[i] = new Edge(s, e, w);
+	}
+	is.close();
+	return arr;
 }
 Edge** readMSTMaxFlowFile(int& edges, int& vertices, int& start, int& end) {
-	return nullptr;
+	ifstream is;
+	string name;
+	cout << "Podaj nazwe pliku: ";
+	cin >> name;
+
+	is.open(name, ifstream::in);
+
+	if (is.fail()) {
+		cout << "Nie udalo sie otworzyc pliku" << endl;
+		return nullptr;
+	}
+
+	is >> edges >> vertices >> start >> end;
+	Edge** arr = new Edge * [edges];
+	int s, e, w;
+	for (int i = 0; i < edges; i++) {
+		is >> s >> e >> w;
+		arr[i] = new Edge(s, e, w);
+	}
+	is.close();
+	return arr;
 }
