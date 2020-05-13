@@ -1,5 +1,8 @@
 
 
+#define PLUS_INF 2147483647
+#define MINUS_INF -2147483648
+
 #include <iostream>
 
 #include "Edge.h"
@@ -18,7 +21,7 @@
 
 using namespace std;
 
-void printShortestPath(int** dist, int vertices);
+void printShortestPath(int* dist, int vertices);
 
 Edge** readMSTFromFile(int& edges, int& vertices);
 Edge** readShortestPathFromFile(int& edges, int& vertices, int& start);
@@ -175,13 +178,14 @@ void doShortestPath() {
 		\r[3] - wyswietl listowo i macierzowo na ekranie\n\
 		\r[4] - Algorytm Dijkstry\n\
 		\r[5] - Algorytm Forda-Bellmana\n\
+		\r[6] - zmien start\n\
 		";
 	Edge** arr = nullptr;
 	NeighbourList** lists = nullptr;
 	NeighbourMatrix* matrix = nullptr;
 	int edges = 0, vertices = 0, start;
 
-	int** result;
+	int* result;
 
 	int choice;
 	do {
@@ -232,9 +236,6 @@ void doShortestPath() {
 			printShortestPath(result, vertices);
 			cout << endl;
 
-			for (int i = 0; i < vertices; i++) {
-				if(result[i] != nullptr) delete result[i];
-			}
 			delete[] result;
 
 			result = dijkstra(matrix, edges, vertices, start);
@@ -242,9 +243,6 @@ void doShortestPath() {
 			printShortestPath(result, vertices);
 			cout << endl;
 
-			for (int i = 0; i < vertices; i++) {
-				if (result[i] != nullptr) delete result[i];
-			}
 			delete[] result;
 			break;
 		case 5:
@@ -258,9 +256,6 @@ void doShortestPath() {
 			printShortestPath(result, vertices);
 			cout << endl;
 
-			for (int i = 0; i < vertices; i++) {
-				if (result[i] != nullptr) delete result[i];
-			}
 			delete[] result;
 
 			result = fordBellman(matrix, edges, vertices, start);
@@ -268,10 +263,24 @@ void doShortestPath() {
 			printShortestPath(result, vertices);
 			cout << endl;
 
-			for (int i = 0; i < vertices; i++) {
-				if (result[i] != nullptr) delete result[i];
-			}
 			delete[] result;
+			break;
+		case 6:
+			if (arr == nullptr) {
+				cout << "Brak mozliwosci zmiany indexu startu. [BRAK GRAFU]" << endl;
+				break;
+			}
+
+			cout << "Obecny index startu: " << start;
+
+			readStartIndex:
+			cout << "Wpisz inny index startu: ";
+			cin >> start;
+			if (start < 0 || start >= vertices) {
+				cout << "Index startu powinien znajdowac sie w zakresie [0, " << (vertices - 1) << ']' << endl;
+				goto readStartIndex;
+			}
+
 			break;
 		}
 	} while (choice != 0);
@@ -295,13 +304,16 @@ void doMaxFlow() {
 		";
 }
 
-void printShortestPath(int** dist, int vertices) {
+void printShortestPath(int* dist, int vertices) {
 	for (int i = 0; i < vertices; i++) {
-		if (dist[i] == nullptr) {
-			cout << "inf ";
+		if (dist[i] == PLUS_INF) {
+			cout << "+inf ";
+		}
+		else if (dist[i] == MINUS_INF) {
+			cout << "-inf ";
 		}
 		else {
-			cout << *dist[i] << ' ';
+			cout << dist[i] << ' ';
 		}
 	}
 	cout << endl;

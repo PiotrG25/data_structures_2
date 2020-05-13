@@ -213,12 +213,11 @@ void testDijkstraList(int baseVertices, int incrementVertices, double density) {
 			NeighbourList** lists = NeighbourList::makeDirectionalNeighbourLists(graph, edges, vertices);
 
 			auto t1 = std::chrono::high_resolution_clock::now();
-			int** result = dijkstra(lists, edges, vertices, rand() % vertices);
+			int* result = dijkstra(lists, edges, vertices, rand() % vertices);
 			auto t2 = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double> t = t2 - t1;
 			sampleResults[i] = t.count();
 
-			for (int j = 0; j < vertices - 1; j++) delete result[j];
 			for (int j = 0; j < vertices; j++) delete lists[j];
 			for (int j = 0; j < edges; j++) delete graph[j];
 			delete[] result;
@@ -257,12 +256,11 @@ void testDijkstraMatrix(int baseVertices, int incrementVertices, double density)
 			NeighbourMatrix* matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(graph, edges, vertices);
 
 			auto t1 = std::chrono::high_resolution_clock::now();
-			int** result = dijkstra(matrix, edges, vertices, rand() % vertices);
+			int* result = dijkstra(matrix, edges, vertices, rand() % vertices);
 			auto t2 = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double> t = t2 - t1;
 			sampleResults[i] = t.count();
 
-			for (int j = 0; j < vertices - 1; j++) delete result[j];
 			for (int j = 0; j < edges; j++) delete graph[j];
 			delete[] result;
 			delete matrix;
@@ -301,12 +299,11 @@ void testFordBellmanList(int baseVertices, int incrementVertices, double density
 			NeighbourList** lists = NeighbourList::makeDirectionalNeighbourLists(graph, edges, vertices);
 
 			auto t1 = std::chrono::high_resolution_clock::now();
-			int** result = fordBellman(lists, edges, vertices, rand() % vertices);
+			int* result = fordBellman(lists, edges, vertices, rand() % vertices);
 			auto t2 = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double> t = t2 - t1;
 			sampleResults[i] = t.count();
 
-			for (int j = 0; j < vertices - 1; j++) delete result[j];
 			for (int j = 0; j < vertices; j++) delete lists[j];
 			for (int j = 0; j < edges; j++) delete graph[j];
 			delete[] result;
@@ -345,12 +342,11 @@ void testFordBellmanMatrix(int baseVertices, int incrementVertices, double densi
 			NeighbourMatrix* matrix = NeighbourMatrix::makeDirectionalNeighbourMatrix(graph, edges, vertices);
 
 			auto t1 = std::chrono::high_resolution_clock::now();
-			int** result = fordBellman(matrix, edges, vertices, rand() % vertices);
+			int* result = fordBellman(matrix, edges, vertices, rand() % vertices);
 			auto t2 = std::chrono::high_resolution_clock::now();
 			std::chrono::duration<double> t = t2 - t1;
 			sampleResults[i] = t.count();
 
-			for (int j = 0; j < vertices - 1; j++) delete result[j];
 			for (int j = 0; j < edges; j++) delete graph[j];
 			delete[] result;
 			delete matrix;

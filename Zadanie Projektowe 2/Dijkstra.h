@@ -2,6 +2,8 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
+#define PLUS_INF 2147483647
+
 #include "Edge.h"
 #include "PQ.h"
 #include "UnionFind.h"
@@ -22,7 +24,7 @@ typedef PQ<VertexDistance> VertexDistancePQ;
 
 // Dijkstra's Shortest Path Finding Algorithm
 // Both work on directional representations of a graph
-int** dijkstra(NeighbourList** lists, int edges, int vertices, int start);
-int** dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start);
+int* dijkstra(NeighbourList** lists, int edges, int vertices, int start);
+int* dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start);
 
 #endif

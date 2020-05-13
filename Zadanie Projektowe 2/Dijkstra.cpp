@@ -11,12 +11,12 @@ bool VertexDistance::operator > (VertexDistance& vd) {
 }
 
 
-int** dijkstra(NeighbourList** lists, int edges, int vertices, int start) {
+int* dijkstra(NeighbourList** lists, int edges, int vertices, int start) {
 	
 	// result array holding distance from start to each vertex
-	int** dist = new int* [vertices];
-	for (int i = 0; i < vertices; i++) dist[i] = nullptr; // infinity
-	dist[start] = new int(0);
+	int* dist = new int[vertices];
+	for (int i = 0; i < vertices; i++) dist[i] = PLUS_INF; // infinity
+	dist[start] = 0;
 
 	// vertex is visited, when all of edges beginning with it, have been considered
 	bool* visited = new bool[vertices];
@@ -44,13 +44,13 @@ int** dijkstra(NeighbourList** lists, int edges, int vertices, int start) {
 			Edge* e = lists[current]->getNext();
 			int start = e->getStart(), end = e->getEnd(), weight = e->getWeight();
 
-			if (dist[end] == nullptr) {
-				dist[end] = new int(*dist[start] + weight);
-				pq->enqueue(new VertexDistance(end, *dist[end]));
+			if (dist[end] == PLUS_INF) {
+				dist[end] = dist[start] + weight;
+				pq->enqueue(new VertexDistance(end, dist[end]));
 			}
-			else if (*dist[start] + weight < *dist[end]) {
-				*dist[end] = *dist[start] + weight;
-				pq->enqueue(new VertexDistance(end, *dist[end]));
+			else if (dist[start] + weight < dist[end]) {
+				dist[end] = dist[start] + weight;
+				pq->enqueue(new VertexDistance(end, dist[end]));
 			}
 		}
 		
@@ -64,12 +64,12 @@ int** dijkstra(NeighbourList** lists, int edges, int vertices, int start) {
 	return dist;
 }
 
-int** dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start) {
+int* dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start) {
 
 	// result array holding distance from start to each vertex
-	int** dist = new int* [vertices];
-	for (int i = 0; i < vertices; i++) dist[i] = nullptr; // infinity
-	dist[start] = new int(0);
+	int* dist = new int[vertices];
+	for (int i = 0; i < vertices; i++) dist[i] = PLUS_INF; // infinity
+	dist[start] = 0;
 
 	// vertex is visited, when all of edges beginning with it, have been considered
 	bool* visited = new bool[vertices];
@@ -97,13 +97,13 @@ int** dijkstra(NeighbourMatrix* matrix, int edges, int vertices, int start) {
 			if (e == nullptr) continue;
 			int start = e->getStart(), end = e->getEnd(), weight = e->getWeight();
 
-			if (dist[end] == nullptr) {
-				dist[end] = new int(*dist[start] + weight);
-				pq->enqueue(new VertexDistance(end, *dist[end]));
+			if (dist[end] == PLUS_INF) {
+				dist[end] = dist[start] + weight;
+				pq->enqueue(new VertexDistance(end, dist[end]));
 			}
-			else if (*dist[start] + weight < *dist[end]) {
-				*dist[end] = *dist[start] + weight;
-				pq->enqueue(new VertexDistance(end, *dist[end]));
+			else if (dist[start] + weight < dist[end]) {
+				dist[end] = dist[start] + weight;
+				pq->enqueue(new VertexDistance(end, dist[end]));
 			}
 		}
 
