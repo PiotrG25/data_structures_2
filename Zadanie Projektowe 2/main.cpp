@@ -34,15 +34,14 @@ void doMaxFlow();
 
 int main() {
 	cout << "Hello, World!" << endl;
-	
+	/*
 	int baseVertices, incrementVertices;
 	double density;
 	cin >> baseVertices >> incrementVertices >> density;
-	testDijkstraList(baseVertices, incrementVertices, density);
-	testDijkstraMatrix(baseVertices, incrementVertices, density);
+	test(baseVertices, incrementVertices, density);*/
 
 	
-	/*
+	
 	string menu = "\
 		\r[0] - zakoncz program\n\
 		\r[1] - wyznaczanie minimalnego drzewa rozpinajacego\n\
@@ -62,7 +61,7 @@ int main() {
 		else if (choice == 3) {
 			doMaxFlow();
 		}
-	} while (choice != 0);*/
+	} while (choice != 0);
 }
 
 
