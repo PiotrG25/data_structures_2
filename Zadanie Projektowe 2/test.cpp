@@ -55,11 +55,11 @@ void testPrimList(int baseVertices, int incrementVertices, double density) {
 		delete[] sampleResults;
 
 		std::string txt = "Prim list.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Prim list " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Prim list\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -99,11 +99,11 @@ void testPrimMatrix(int baseVertices, int incrementVertices, double density) {
 		delete[] sampleResults;
 
 		std::string txt = "Prim matrix.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Prim matrix " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Prim matrix\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -145,11 +145,11 @@ void testKruskalList(int baseVertices, int incrementVertices, double density) {
 		delete[] sampleResults;
 
 		std::string txt = "Kruskal list.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Kruskal list " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Kruskal list\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -189,11 +189,11 @@ void testKruskalMatrix(int baseVertices, int incrementVertices, double density) 
 		delete[] sampleResults;
 
 		std::string txt = "Kruskal matrix.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Kruskal matrix " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Kruskal matrix\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -233,11 +233,11 @@ void testDijkstraList(int baseVertices, int incrementVertices, double density) {
 		delete[] sampleResults;
 
 		std::string txt = "Dijkstra list.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Dijkstra list " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Dijkstra list\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -275,11 +275,11 @@ void testDijkstraMatrix(int baseVertices, int incrementVertices, double density)
 		delete[] sampleResults;
 
 		std::string txt = "Dijkstra matrix.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Dijkstra matrix " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Dijkstra matrix\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -319,11 +319,11 @@ void testFordBellmanList(int baseVertices, int incrementVertices, double density
 		delete[] sampleResults;
 
 		std::string txt = "Ford-Bellman list.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Ford-Bellman list " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Ford-Bellman list\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
@@ -361,11 +361,11 @@ void testFordBellmanMatrix(int baseVertices, int incrementVertices, double densi
 		delete[] sampleResults;
 
 		std::string txt = "Ford-Bellman matrix.txt";
-		std::cout << txt << ' ' << result << std::endl;
+		std::cout << "Ford-Bellman matrix " << vertices << ' ' << std::fixed << std::setprecision(2) << density << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
 
 		std::ofstream os;
 		os.open(txt, std::ios::out | std::ios::app);
-		os << vertices << ' ' << std::fixed << std::setprecision(12) << result << std::endl;
+		os << "Ford-Bellman matrix\t" << vertices << '\t' << std::fixed << std::setprecision(2) << density << '\t' << std::fixed << std::setprecision(12) << result << std::endl;
 		os.close();
 	}
 }
