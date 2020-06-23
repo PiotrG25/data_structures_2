@@ -11,5 +11,4 @@ Graph algorithms
 |Dijkstra|O(Elog(V))|
 |Ford-Bellman|O(EV)|
 
-E - number of edges
-V - number of vertices
+E - number of edges, V - number of vertices
