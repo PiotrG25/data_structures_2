@@ -25,7 +25,7 @@ void UnionFind::unify(int i, int j) {
 
 	if (iroot == jroot) return;
 
-	if (size[i] > size[j]) {
+	if (size[iroot] > size[jroot]) {
 		id[jroot] = iroot;
 		size[iroot] += size[jroot];
 	}
